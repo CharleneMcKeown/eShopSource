@@ -26,6 +26,7 @@ jobs:
 
   buildPushAppImage:
     name: Build and Push to ACR
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -41,5 +42,5 @@ jobs:
 
     - run: |
         cd src/Web
-        docker build . -t ${{ secrets.ACR_SERVER }}/eShop:${{ github.run_id }}
-        docker push ${{ secrets.ACR_SERVER }}/eShop:${{ github.run_id }}
+        docker build . -t ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
+        docker push ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
