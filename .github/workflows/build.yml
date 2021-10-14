@@ -41,6 +41,5 @@ jobs:
         login-server: ${{ secrets.ACR_SERVER}}
 
     - run: |
-        cd src/Web
-        docker build . -t ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
+        docker build ./src/Web -t ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
         docker push ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
