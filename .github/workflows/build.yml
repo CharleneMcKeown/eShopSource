@@ -25,7 +25,6 @@ jobs:
       run: dotnet test ./eShopOnWeb.sln --configuration Release
 
   buildPushAppImage:
-    name: Build and Push to ACR
     runs-on: ubuntu-latest
     steps:
     
