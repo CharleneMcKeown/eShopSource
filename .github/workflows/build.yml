@@ -46,6 +46,7 @@ jobs:
 
   deployStaging:
     runs-on: ubuntu-latest
+    needs: buildPushAppImage
     environment: staging
     steps:
     - name: Azure Container Registry Login
@@ -68,12 +69,13 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with:
         # Name of the Azure Web App
-        app-name: GitHubWorkShop12345678
+        app-name: eshopmec
         slot-name: staging
         images: ${{ secrets.ACR_SERVER }}/eshop:${{ github.run_id }}
 
   deployProduction:
       runs-on: ubuntu-latest
+      needs: deployStaging
       environment: production
       steps:
       - name: Azure Login
@@ -84,4 +86,4 @@ jobs:
     
       - name: Swap staging to production
         run: |
-          az webapp deployment slot swap --name GitHubWorkShop12345678 --resource-group GitHubWorkShop12345678 --slot staging --target-slot production
+          az webapp deployment slot swap --name eshopmec --resource-group eshop --slot staging --target-slot production
